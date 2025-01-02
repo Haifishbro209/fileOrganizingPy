@@ -1,6 +1,7 @@
 import os
 import shutil
 from time import sleep
+from PIL import Image
 
 DirPath = "C:/Users/User/Downloads"
 prevFiles = set(os.listdir(DirPath))
@@ -28,9 +29,9 @@ def Img(file):
     print()
 
 def Gif(file):
-    print()
+    move_file(file,r"C:\Users\User\Desktop\VID\GIF")
 def Prog(file):
-    print()
+    move_file(file,r"C:\Users\User\Desktop\Programme")
 
 def newItems(files):
     print("new Items in Download Directory found")
