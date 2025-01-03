@@ -6,6 +6,11 @@ from PIL import Image
 DirPath = "C:/Users/User/Downloads"
 prevFiles = set(os.listdir(DirPath))
 
+imgPath = r"C\Users\User\Desktop\IMG"
+vidPath = r""
+ProgrammPath = r""
+gifPath = r""
+
 def move_file(file, target_dir):
     # Sicherstellen, dass der Zielordner existiert
     if not os.path.exists(target_dir):
@@ -26,11 +31,17 @@ def Aud(file):
     print()
 
 def Img(file):
-    with Image.open(file) as img:
-        b,h = img.size
-        b,h = str(b), str(h)
-        name = file.rsplit('')
-        img.save()
+    move_file(file,imgPath)
+    file_path = os.path.join(imgPath, file)  # Vollständigen Pfad erstellen
+    with Image.open(file_path) as img:
+        b, h = img.size
+        b, h = str(b), str(h)
+        name = file.rsplit('.', 1)[0]
+        new_file_name = f"{b}x{h}|{name}.png"
+        new_file_path = os.path.join(imgPath, new_file_name)
+        img.save(new_file_path)
+        print(f"Image saved as {new_file_path}")
+
 def Gif(file):
     move_file(file,r"C:\Users\User\Desktop\VID\GIF")
 def Prog(file):
