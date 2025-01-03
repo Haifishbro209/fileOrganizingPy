@@ -26,8 +26,11 @@ def Aud(file):
     print()
 
 def Img(file):
-    print()
-
+    with Image.open(file) as img:
+        b,h = img.size
+        b,h = str(b), str(h)
+        name = file.rsplit('')
+        img.save()
 def Gif(file):
     move_file(file,r"C:\Users\User\Desktop\VID\GIF")
 def Prog(file):
@@ -43,7 +46,7 @@ def newItems(files):
         match file_type:
             case "mp4" | "mov" | "avi" | "wmv" | "mkv":
                 Vid(file)
-            case "mp3" | "wav" | "aac" | "flac" | "aiff" | "ogg" | "wma":
+            case "mp3" | "wav":
                 Aud(file)
             case "jpg" | "jpeg" | "png" | "webp" | "bmp" :
                 Img(file)
