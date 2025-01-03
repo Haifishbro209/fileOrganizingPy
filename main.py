@@ -6,10 +6,11 @@ from PIL import Image
 DirPath = "C:/Users/User/Downloads"
 prevFiles = set(os.listdir(DirPath))
 
-imgPath = r"C\Users\User\Desktop\IMG"
-vidPath = r""
-ProgrammPath = r""
-gifPath = r""
+imgPath = r"C:\Users\User\Desktop\IMG"
+vidPath = r"C:\Users\User\Desktop\VID"
+ProgrammPath = r"C:\Users\User\Desktop\Programme"
+gifPath = r"C:\Users\User\Desktop\IMG\GIF"
+audPath = r"C:\Users\User\Desktop\AUD"
 
 def move_file(file, target_dir):
     # Sicherstellen, dass der Zielordner existiert
@@ -25,27 +26,55 @@ def move_file(file, target_dir):
     print(f"Moved {file} to {target_dir}")
 
 def Vid(file):
-    print()
+    move_file(file,vidPath)
+    file_path = os.path.join(vidPath,file)
+    name = file.rsplit('.', 1)[0]
+    newFilePath = os.path.join(vidPath,f"{name}.mp4")
+    os.rename(file_path,newFilePath)
+
 
 def Aud(file):
-    print()
+    move_file(file,audPath)
+    file_path = os.path.join(audPath,file)
+    name = file.rsplit('.', 1)[0]
+    newFilePath = os.path.join(audPath,f"{name}.mp3")
+    os.rename(file_path,newFilePath)
 
 def Img(file):
     move_file(file,imgPath)
-    file_path = os.path.join(imgPath, file)  # Vollständigen Pfad erstellen
+    file_path = os.path.join(imgPath, file)
+    print(file_path)  # Vollständigen Pfad erstellen
     with Image.open(file_path) as img:
         b, h = img.size
         b, h = str(b), str(h)
         name = file.rsplit('.', 1)[0]
-        new_file_name = f"{b}x{h}|{name}.png"
+        new_file_name = f"{b}x{h}__{name}.png"
         new_file_path = os.path.join(imgPath, new_file_name)
         img.save(new_file_path)
         print(f"Image saved as {new_file_path}")
+    os.remove(file_path)
 
 def Gif(file):
-    move_file(file,r"C:\Users\User\Desktop\VID\GIF")
+    move_file(file,gifPath)
+    file_path = os.path.join(gifPath, file)
+    print(file_path)  # Vollständigen Pfad erstellen
+    with Image.open(file_path) as img:
+        b, h = img.size
+        b, h = str(b), str(h)
+        new_file_name = f"{b}x{h}__{file}"
+        new_file_path = os.path.join(gifPath, new_file_name)
+        img.save(new_file_path)
+        print(f"Image saved as {new_file_path}")
+    os.remove(file_path)
+
+
 def Prog(file):
-    move_file(file,r"C:\Users\User\Desktop\Programme")
+    move_file(file,ProgrammPath)
+    file_path = os.path.join(ProgrammPath,file)
+    size = str(round(os.stat(file_path).st_size/(1024*1024)))
+    newFile = f"{size}MB_{file}"
+    newFilePath = os.path.join(ProgrammPath,newFile)
+    os.rename(file_path,newFilePath)
 
 def newItems(files):
     print("new Items in Download Directory found")
