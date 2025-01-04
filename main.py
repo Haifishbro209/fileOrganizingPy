@@ -21,9 +21,15 @@ def move_file(file, target_dir):
     source = os.path.join(DirPath, file)
     target = os.path.join(target_dir, file)
     
+    # Prüfen, ob die Datei im Zielordner bereits existiert
+    if os.path.exists(target):
+        base, ext = os.path.splitext(file)  # Dateiname und Erweiterung trennen
+        target = os.path.join(target_dir, f"{base}_copy{ext}")
+    
     # Datei verschieben
     shutil.move(source, target)
-    print(f"Moved {file} to {target_dir}")
+    print(f"Moved {file} to {target_dir} as {os.path.basename(target)}")
+
 
 def Vid(file):
     move_file(file,vidPath)
