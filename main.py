@@ -3,14 +3,14 @@ import shutil
 from time import sleep
 from PIL import Image
 
-DirPath = "C:/Users/User/Downloads"
+DirPath = "~/Downloads"
 prevFiles = set(os.listdir(DirPath))
 
-imgPath = r"C:\Users\User\Desktop\IMG"
-vidPath = r"C:\Users\User\Desktop\VID"
-ProgrammPath = r"C:\Users\User\Desktop\Programme"
-gifPath = r"C:\Users\User\Desktop\IMG\GIF"
-audPath = r"C:\Users\User\Desktop\AUD"
+imgPath = r"~/Downloads/IMG"
+vidPath = r"~/Downloads/VID"
+ProgrammPath = r"~/Downloads/Programme"
+gifPath = r"~/Downloads/GIF"
+audPath = r"~/Downloads/AUD"
 
 def move_file(file, target_dir):
     # Sicherstellen, dass der Zielordner existiert
@@ -21,7 +21,6 @@ def move_file(file, target_dir):
     source = os.path.join(DirPath, file)
     target = os.path.join(target_dir, file)
     
-    # Prüfen, ob die Datei im Zielordner bereits existiert
     if os.path.exists(target):
         base, ext = os.path.splitext(file)  # Dateiname und Erweiterung trennen
         target = os.path.join(target_dir, f"{base}_copy{ext}")
